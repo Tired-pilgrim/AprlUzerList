@@ -1,10 +1,9 @@
 ﻿using Model;
 using System.Windows;
 using ViewModel;
-using ViewModelLib.Commands;
 using Views.Windows;
 
-namespace UserListNew
+namespace View
 {
     /// <summary>
     /// Interaction logic for App.xaml

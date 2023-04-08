@@ -1,22 +1,33 @@
-﻿using MdelLib;
+﻿
 using Model;
+using ModelLib;
 using System.Collections.ObjectModel;
 using VievModelLib;
 using ViewModelLib.Commands;
 
 namespace ViewModel
 {
-    public class MainViewModel: ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
-        private MainModel _mineModel;
-        public RelayCommand OpenListCommand { get; }
-        public ObservableCollection<User>? Users => _mineModel.Users;
+        private readonly MainModel mineModel;
+        public RelayCommand AddUserCommand { get; }
+        public ReadOnlyObservableCollection<User> Users => mineModel.Users;
         public MainViewModel(MainModel mineModel)
         {
-            _mineModel = mineModel;
-            //OpenListCommand = new RelayCommand(() => Debug.WriteLine("Команда OpenListCommand"));
+            this.mineModel = mineModel;
+            AddUserCommand = new RelayCommand<User>
+            (
+                user => mineModel.AddUzer(user),
+                user => !(string.IsNullOrWhiteSpace(user.Name) ||
+                          string.IsNullOrWhiteSpace(user.Family) ||
+                          string.IsNullOrWhiteSpace(user.Job)));
         }
-        
-        public void AddUser(User user) => _mineModel.AddUzer(user);
+
+        // Только для режима разработки
+        public MainViewModel()
+        {
+            mineModel = new();
+            AddUserCommand = new RelayCommand(() => { });
+        }
     }
 }

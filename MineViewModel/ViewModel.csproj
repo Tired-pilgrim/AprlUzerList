@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MdelLib\MdelLib.csproj" />
+    <ProjectReference Include="..\MdelLib\ModelLib.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
     <ProjectReference Include="..\VievModelLib\VievModelLib.csproj" />
   </ItemGroup>
