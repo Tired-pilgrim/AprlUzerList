@@ -9,12 +9,27 @@ using ViewLib.Commands;
 
 namespace ViewModel
 {
-    public class MineViewModel : ViewModelBase
+     public class MainViewModel : ViewModelBase
     {
-        public RelayCommand OpenListCommand { get; }
-        public MineViewModel()
+        private readonly MainModel mineModel;
+        public RelayCommand AddUserCommand { get; }
+        public ReadOnlyObservableCollection<User> Users => mineModel.Users;
+        public MainViewModel(MainModel mineModel)
         {
-            OpenListCommand = new RelayCommand(() => Debug.WriteLine("Команда работает!"));
+            this.mineModel = mineModel;
+            AddUserCommand = new RelayCommand<User>
+            (
+                user => mineModel.AddUzer(user),
+                user => !(string.IsNullOrWhiteSpace(user.Name) ||
+                          string.IsNullOrWhiteSpace(user.Family) ||
+                          string.IsNullOrWhiteSpace(user.Job)));
+        }
+
+        // Только для режима разработки
+        public MainViewModel()
+        {
+            mineModel = new();
+            AddUserCommand = new RelayCommand(() => { });
         }
     }
 }
