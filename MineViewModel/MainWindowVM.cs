@@ -9,7 +9,6 @@ namespace ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        //правка
         private readonly MainModel mineModel;
         public RelayCommand AddUserCommand { get; }
         public ReadOnlyObservableCollection<User> Users => mineModel.Users;
