@@ -20,6 +20,7 @@ namespace Model
         }
 
         public void AddUzer(User user) => privateUsers.Add(user);
+        public void RemoveUzer(User user) => privateUsers.Remove(user);
     }
 
 }

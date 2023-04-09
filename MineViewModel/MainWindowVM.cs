@@ -12,6 +12,7 @@ namespace ViewModel
         
         private readonly MainModel mineModel;
         public RelayCommand AddUserCommand { get; }
+        public RelayCommand RemoveUserCommand { get; }
         public ReadOnlyObservableCollection<User> Users => mineModel.Users;
         public MainViewModel(MainModel mineModel)
         {
@@ -22,6 +23,7 @@ namespace ViewModel
                 user => !(string.IsNullOrWhiteSpace(user.Name) ||
                           string.IsNullOrWhiteSpace(user.Family) ||
                           string.IsNullOrWhiteSpace(user.Job)));
+            RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
         }
 
         // Только для режима разработки
